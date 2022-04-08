@@ -21,5 +21,11 @@ export const useTodos = defineStore('todos', {
         done: false,
       });
     },
+    deleteTodo(index: number) {
+      this.todos.splice(index, 1);
+    },
+    toggleTodo(index: number) {
+      this.todos[index].done = !this.todos[index].done;
+    },
   },
 });

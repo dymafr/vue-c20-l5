@@ -1,6 +1,6 @@
 <template>
   <div class="p-20 d-flex justify-content-center">
-    <div class="card">
+    <div class="card container">
       <h1 class="mb-20">Todo List</h1>
       <div class="d-flex align-items-center">
         <input v-model="input" type="text" class="flex-fill mr-20" />
@@ -8,11 +8,16 @@
       </div>
       <ul>
         <li
-          v-for="todo in todos"
-          class="d-flex align-items-center"
+          @click="toggleTodo(index)"
+          v-for="(todo, index) in todos"
+          class="card d-flex align-items-center"
           :key="todo.content"
         >
-          {{ todo.content }}
+          <input :checked="todo.done" type="checkbox" />
+          <span class="flex-fill">{{ todo.content }}</span>
+          <button @click.stop="deleteTodo(index)" class="btn btn-danger">
+            Supprimer
+          </button>
         </li>
       </ul>
     </div>
@@ -32,12 +37,25 @@ function addTodo() {
   todoStore.addTodo(input.value);
   input.value = '';
 }
+
+function deleteTodo(index: number) {
+  todoStore.deleteTodo(index);
+}
+
+function toggleTodo(index: number) {
+  todoStore.toggleTodo(index);
+}
 </script>
 
 <style lang="scss">
 @import './assets/scss/base.scss';
 
-.card {
+.container {
   width: 500px;
+}
+
+li {
+  margin-bottom: 20px;
+  cursor: pointer;
 }
 </style>
