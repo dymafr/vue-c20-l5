@@ -13,7 +13,7 @@
           class="card d-flex align-items-center"
           :key="todo.content"
         >
-          <input :checked="todo.done" type="checkbox" />
+          <input class="mr-20" :checked="todo.done" type="checkbox" />
           <span class="flex-fill">{{ todo.content }}</span>
           <button @click.stop="deleteTodo(index)" class="btn btn-danger">
             Supprimer
